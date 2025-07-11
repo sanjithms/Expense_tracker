@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Line, Pie } from 'react-chartjs-2';
+import {
+  Line,
+  Pie,
+  Bar,
+  Doughnut,
+  Radar,
+} from 'react-chartjs-2';
 // eslint-disable-next-line no-unused-vars
 import Chart from 'chart.js/auto';
 import html2canvas from 'html2canvas';
@@ -58,10 +64,12 @@ const Charts = () => {
   const totalExpenses = getFilteredTotal(expenses);
   const balance = totalIncome - totalExpenses;
 
+  const months = Array.from({ length: 12 }, (_, i) =>
+    new Date(0, i).toLocaleString('default', { month: 'short' })
+  );
+
   const chartData = {
-    labels: Array.from({ length: 12 }, (_, i) =>
-      new Date(0, i).toLocaleString('default', { month: 'short' })
-    ),
+    labels: months,
     datasets: [
       {
         label: 'Income',
@@ -92,6 +100,26 @@ const Charts = () => {
       {
         data: [totalIncome, totalExpenses],
         backgroundColor: ['#28a745', '#dc3545'],
+      },
+    ],
+  };
+
+  const radarChartData = {
+    labels: months.slice(0, 6),
+    datasets: [
+      {
+        label: 'Income',
+        data: incomeData.slice(0, 6),
+        backgroundColor: 'rgba(40, 167, 69, 0.3)',
+        borderColor: '#28a745',
+        pointBackgroundColor: '#28a745',
+      },
+      {
+        label: 'Expenses',
+        data: expenseData.slice(0, 6),
+        backgroundColor: 'rgba(220, 53, 69, 0.3)',
+        borderColor: '#dc3545',
+        pointBackgroundColor: '#dc3545',
       },
     ],
   };
@@ -130,23 +158,22 @@ const Charts = () => {
         </select>
 
         <div>
-          <button
-            onClick={() => setChartType('line')}
-            className={chartType === 'line' ? 'active' : ''}
-          >
-            Line
-          </button>
-          <button
-            onClick={() => setChartType('pie')}
-            className={chartType === 'pie' ? 'active' : ''}
-          >
-            Pie
-          </button>
+          <button onClick={() => setChartType('line')} className={chartType === 'line' ? 'active' : ''}>Line</button>
+          <button onClick={() => setChartType('bar')} className={chartType === 'bar' ? 'active' : ''}>Bar</button>
+          <button onClick={() => setChartType('pie')} className={chartType === 'pie' ? 'active' : ''}>Pie</button>
+          <button onClick={() => setChartType('doughnut')} className={chartType === 'doughnut' ? 'active' : ''}>Doughnut</button>
+          <button onClick={() => setChartType('radar')} className={chartType === 'radar' ? 'active' : ''}>Radar</button>
         </div>
       </div>
 
-      <div ref={chartRef} className={`chart-wrapper ${chartType === 'pie' ? 'pie-chart' : ''}`}>
-        {chartType === 'line' ? <Line data={chartData} /> : <Pie data={pieChartData} />}
+      <div ref={chartRef}className={`chart-wrapper ${chartType === 'pie' || chartType === 'doughnut'? 'pie-chart': chartType === 'radar'? 'radar-chart': ''}`}
+>
+
+        {chartType === 'line' && <Line data={chartData} />}
+        {chartType === 'bar' && <Bar data={chartData} />}
+        {chartType === 'pie' && <Pie data={pieChartData} />}
+        {chartType === 'doughnut' && <Doughnut data={pieChartData} />}
+        {chartType === 'radar' && <Radar data={radarChartData} />}
       </div>
 
       <div className="summary-boxes">

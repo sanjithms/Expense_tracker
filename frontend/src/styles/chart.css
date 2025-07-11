@@ -1,6 +1,6 @@
 .chart-container {
   max-width: 900px;
-  margin: 100px auto 40px; /* added top space for fixed navbar */
+  margin: 100px auto 40px; /* space for fixed navbar */
   background: #fff;
   padding: 30px 25px;
   border-radius: 16px;
@@ -33,28 +33,36 @@
   font-size: 15px;
   width: 160px;
   background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+.chart-controls select:focus {
+  outline: none;
+  border-color: #00b4d8;
 }
 
 .chart-controls button {
   padding: 10px 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px;
   font-size: 14px;
+  margin: 5px;
   font-weight: 500;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #6c757d;
   color: white;
-  transition: background-color 0.3s ease;
-  margin: 10px;
+  transition: all 0.3s ease;
 }
 
 .chart-controls button:hover {
-  background-color: #0056b3;
+  background-color: #495057;
+  transform: scale(1.02);
 }
 
 .chart-controls button.active {
-  background-color: #28a745;
+  background-color: #17a2b8;
   color: #fff;
+  transform: scale(1.05);
 }
 
 /* Chart Wrapper */
@@ -73,8 +81,9 @@
   height: auto !important;
 }
 
-.pie-chart canvas {
-  max-width: 320px !important;
+.pie-chart canvas,
+.radar-chart canvas {
+  max-width: 400px !important;
   height: auto !important;
 }
 
@@ -122,11 +131,12 @@
   margin: 30px auto 10px;
   display: block;
   font-size: 15px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .export-btn:hover {
   background-color: #1e1e1e !important;
+  transform: scale(1.03);
 }
 
 /* Responsive Styling */
