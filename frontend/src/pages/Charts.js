@@ -13,7 +13,7 @@ const Charts = () => {
   const [expenses, setExpenses] = useState([]);
   const chartRef = useRef(null);
 
-  const BACKEND_URL = 'https://expense-tracker-backend-9ei3.onrender.com';
+  const BACKEND_URL = 'https://expense-tracker-pm4n.onrender.com';
 
   useEffect(() => {
     const fetchData = async () => {

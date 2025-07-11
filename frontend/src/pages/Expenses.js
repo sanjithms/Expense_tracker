@@ -10,7 +10,7 @@ const Expenses = () => {
   const [filterMonth, setFilterMonth] = useState('');
   const [filterYear, setFilterYear] = useState('');
 
-  const BACKEND_URL = 'https://expense-tracker-backend-9ei3.onrender.com';
+  const BACKEND_URL = 'https://expense-tracker-pm4n.onrender.com';
 
   useEffect(() => {
     const fetchExpenses = async () => {
