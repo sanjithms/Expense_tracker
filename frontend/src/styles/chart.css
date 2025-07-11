@@ -1,6 +1,6 @@
 .chart-container {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 100px auto 40px; /* added top space for fixed navbar */
   background: #fff;
   padding: 30px 25px;
   border-radius: 16px;
@@ -10,12 +10,13 @@
 
 .chart-container h2 {
   text-align: center;
-  margin-bottom: 35px; /* Increased spacing between heading and chart */
+  margin-bottom: 35px;
   color: #222;
   font-size: 32px;
   font-weight: 600;
 }
 
+/* Controls */
 .chart-controls {
   display: flex;
   flex-wrap: wrap;
@@ -40,11 +41,11 @@
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  margin: 20px;
   cursor: pointer;
   background-color: #007bff;
   color: white;
   transition: background-color 0.3s ease;
+  margin: 10px;
 }
 
 .chart-controls button:hover {
@@ -56,17 +57,7 @@
   color: #fff;
 }
 
-.export-btn {
-  background-color: #343a40 !important;
-  color: white !important;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin: 30px auto 10px;
-  display: block;
-  font-size: 15px;
-}
-
+/* Chart Wrapper */
 .chart-wrapper {
   width: 100%;
   padding: 20px 10px;
@@ -74,6 +65,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  overflow-x: auto;
 }
 
 .chart-wrapper canvas {
@@ -86,7 +78,7 @@
   height: auto !important;
 }
 
-/* Summary boxes for totals */
+/* Summary Boxes */
 .summary-boxes {
   display: flex;
   justify-content: space-around;
@@ -113,7 +105,6 @@
 .expense-box {
   background-color: #f8d7da;
   color: #721c24;
-  
 }
 
 .balance-box {
@@ -121,23 +112,38 @@
   color: #0c5460;
 }
 
-/* Responsive */
-@media screen and (max-width: 600px) {
+/* Export Button */
+.export-btn {
+  background-color: #343a40 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 30px auto 10px;
+  display: block;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.export-btn:hover {
+  background-color: #1e1e1e !important;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
   .chart-controls {
     flex-direction: column;
-    align-items: center;
     gap: 10px;
   }
 
   .chart-controls select,
   .chart-controls button {
     width: 100%;
-    max-width: 260px;
+    max-width: 280px;
   }
-  
 
   .chart-wrapper {
-    padding: 0;
+    padding: 10px 0;
   }
 
   .summary-boxes {
@@ -151,6 +157,31 @@
   }
 
   .pie-chart canvas {
-    max-width: 250px !important;
+    max-width: 240px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .chart-container {
+    padding: 20px 15px;
+    margin-top: 110px;
+  }
+
+  .chart-controls select {
+    font-size: 14px;
+  }
+
+  .chart-controls button {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .summary-box {
+    font-size: 14px;
+  }
+
+  .export-btn {
+    font-size: 14px;
+    padding: 10px 18px;
   }
 }
